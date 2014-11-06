@@ -1,0 +1,6 @@
+{
+  "name": "promise",
+  "dependencies": {
+    "es6-promise": "~1.0.0"
+  }
+}
