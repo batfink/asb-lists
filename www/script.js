@@ -1,11 +1,64 @@
-var promise = new Promise(function(resolve, reject) {
-    resolve('tjobing');
-});
+var afb = afb || {};
 
-var p = document.getElementsByTagName('p')[0];
+afb.Table = function(config) {
 
-function updatePage() {
-    p.innerText += ' Sure, baby!';
+    Object.keys(config).forEach(function(prop) {
+        this[prop] = config[prop];
+    }.bind(this));
+
+    getSpreadsheet.bind(undefined, this.key)()
+        .then(parseDates)
+        .then(buildHTML.bind(undefined, this.columns))
+        .then(appendToPage.bind(undefined, this.el))
+        .catch(handleError);
+
+    function getSpreadsheet(key) {
+        return new Promise(function(resolve, reject) {
+
+            Tabletop.init({
+                key: key,
+                callback: function(data, tabletop) {
+                    resolve(data);
+                },
+                simpleSheet: true
+            });
+
+        });
+    };
+
+    function parseDates(data) {
+        return data;
+    };
+
+    function buildHTML(columns, data) {
+
+        var table = document.createElement('table');
+
+        data.forEach(function(row) {
+            var tr = document.createElement('tr');
+
+            columns.forEach(function(key) {
+
+                var td = document.createElement('td');
+                var txt = document.createTextNode(row[key]);
+                td.appendChild(txt);
+
+                tr.appendChild(td);
+            });
+
+            table.appendChild(tr);
+        });
+
+        return table;
+    };
+
+    function appendToPage(parent, table) {
+        parent.appendChild(table);
+    };
+
+    function handleError(error) {
+        console.error(error);
+    };
+
+
 };
-
-promise.then(updatePage);
