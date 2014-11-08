@@ -1,4 +1,3 @@
 node_modules
 npm-debug.log
-www/es6-promise
-www/tabletop
+bower_components
