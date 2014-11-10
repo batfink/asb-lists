@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var deploy = require('gulp-gh-pages');
 
 gulp.task('copy:tabletop', function() {
     gulp.src('bower_components/tabletop/src/tabletop.js').pipe(gulp.dest('www/lib'));
@@ -26,4 +27,9 @@ gulp.task('default', ['setup'], function() {
     gulp.watch(['www/**/*'], reload);
     gulp.watch(['bower_components'])
 
+});
+
+gulp.task('deploy', function () {
+    return gulp.src('./www/**/*')
+        .pipe(deploy());
 });

@@ -37,9 +37,9 @@ afb.Table = function(config) {
         data.forEach(function(row) {
             var tr = document.createElement('tr');
 
-            columns.forEach(function(key) {
+            columns.forEach(function(key, i) {
 
-                var td = document.createElement('td');
+                var td = i === 0 ? document.createElement('th') : document.createElement('td');
                 var txt = document.createTextNode(row[key]);
                 td.appendChild(txt);
 
