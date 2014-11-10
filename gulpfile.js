@@ -6,6 +6,7 @@ var deploy = require('gulp-gh-pages');
 var dependencies = [
     'bower_components/tabletop/src/tabletop.js',
     'bower_components/es6-promise/promise.js',
+    'bower_components/marked/lib/marked.js',
     'node_modules/document-register-element/build/document-register-element.js'
 ];
 

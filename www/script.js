@@ -2,6 +2,10 @@ var afb = afb || {};
 
 afb.Table = function(config) {
 
+    window.paras = [];
+
+    //console.log(marked('**tjobing**'));
+
     Object.keys(config).forEach(function(prop) {
         this[prop] = config[prop];
     }.bind(this));
@@ -40,8 +44,10 @@ afb.Table = function(config) {
             columns.forEach(function(key, i) {
 
                 var td = i === 0 ? document.createElement('th') : document.createElement('td');
-                var txt = document.createTextNode(row[key]);
-                td.appendChild(txt);
+                var txt = marked(row[key]);
+
+                td.innerHTML = txt;
+                td.innerHTML = td.getElementsByTagName('p')[0].innerHTML;            
 
                 tr.appendChild(td);
             });
