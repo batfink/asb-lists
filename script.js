@@ -36,6 +36,10 @@ afb.Table = function(config) {
     };
 
     function parseDates(data) {
+
+    //    var year =
+        //console.log(data);
+
         return data;
     };
 
@@ -52,23 +56,30 @@ afb.Table = function(config) {
                 var txt = row[key];
 
                 if (i === 0) {
-                    var regex = /([0-9]{2})\.([0-9]{2})@(heldags|[0-9]{2}.[0-9]{2})(?:–)?([0-9]{2}\.[0-9]{2})?/;
+                    var regex = /([0-9]{2})\.([0-9]{2})\.([0-9]{2})@(heldags|[0-9]{2}.[0-9]{2})(?:[–|-])?([0-9]{2}\.[0-9]{2})?/;
                     var time = regex.exec(txt);
-                    var d = new Date(2014, time[2] - 1, time[1]);
+                    var year = Number(time[3]) + 2000;
+
+                    //console.log(year);
+
+                    var d = new Date(year, time[2] - 1, time[1]);
+
                     var day = dayNames[d.getDay()];
                     var date = time[1];
                     var month = monthNames[time[2]-1];
 
-
                     var dateString = day + ' ' + date + '. ' + month;
 
-                    if (time[3].length < 6) {
-                        dateString += ' kl. ' + time[3];
+                    if (time[4].length < 6) {
+                        dateString += ' kl. ' + time[4];
                     };
 
-                    if (time[4] !== undefined) {
-                        dateString += '–' + time[4];
+                    if (time[5] !== undefined) {
+                        dateString += '–' + time[5];
                     };
+
+                    console.log(time, dateString);
+
 
                     cell = document.createElement('th');
                     cell.appendChild(document.createTextNode(dateString));
