@@ -56,9 +56,12 @@ afb.Table = function(config) {
                 var txt = row[key];
 
                 if (i === 0) {
-                    var regex = /([0-9]{2})\.([0-9]{2})\.([0-9]{2})@(heldags|[0-9]{2}.[0-9]{2})(?:–)?([0-9]{2}\.[0-9]{2})?/;
+                    var regex = /([0-9]{2})\.([0-9]{2})\.([0-9]{2})@(heldags|[0-9]{2}.[0-9]{2})(?:[–|-])?([0-9]{2}\.[0-9]{2})?/;
                     var time = regex.exec(txt);
-                    var year = time[3] + 2000;
+                    var year = Number(time[3]) + 2000;
+
+                    //console.log(year);
+
                     var d = new Date(year, time[2] - 1, time[1]);
 
                     var day = dayNames[d.getDay()];
