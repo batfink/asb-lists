@@ -78,6 +78,8 @@ afb.Table = function(config) {
                         dateString += '–' + time[5];
                     };
 
+                    console.log(time, dateString);
+
 
                     cell = document.createElement('th');
                     cell.appendChild(document.createTextNode(dateString));
