@@ -4,6 +4,11 @@ afb.Table = function(config) {
 
     window.paras = [];
 
+    var dayNames =          ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'],
+        shortDayNames =     ['søn', 'man', 'tir', 'ons', 'tor', 'fre', 'lør', 'søn'],
+        monthNames =        ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember'],
+        shortMonthNames =   ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des'];
+
     //console.log(marked('**tjobing**'));
 
     Object.keys(config).forEach(function(prop) {
@@ -43,13 +48,37 @@ afb.Table = function(config) {
 
             columns.forEach(function(key, i) {
 
-                var td = i === 0 ? document.createElement('th') : document.createElement('td');
-                var txt = marked(row[key]);
+                var cell;
+                var txt = row[key];
 
-                td.innerHTML = txt;
-                td.innerHTML = td.getElementsByTagName('p')[0].innerHTML;            
+                if (i === 0) {
+                    var regex = /([0-9]{2})\.([0-9]{2})@(heldags|[0-9]{2}.[0-9]{2})(?:–)?([0-9]{2}\.[0-9]{2})?/;
+                    var time = regex.exec(txt);
+                    var d = new Date(2014, time[2] - 1, time[1]);
+                    var day = dayNames[d.getDay()];
+                    var date = time[1];
+                    var month = monthNames[time[2]-1];
 
-                tr.appendChild(td);
+
+                    var dateString = day + ' ' + date + '. ' + month;
+
+                    if (time[3].length < 6) {
+                        dateString += ' kl. ' + time[3];
+                    };
+
+                    if (time[4] !== undefined) {
+                        dateString += '–' + time[4];
+                    };
+
+                    cell = document.createElement('th');
+                    cell.appendChild(document.createTextNode(dateString));
+                } else {
+                    cell = document.createElement('td');
+                    cell.innerHTML = marked(txt);
+                    cell.innerHTML = cell.getElementsByTagName('p')[0].innerHTML;
+                };
+
+                tr.appendChild(cell);
             });
 
             table.appendChild(tr);
