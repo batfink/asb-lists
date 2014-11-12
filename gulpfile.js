@@ -22,7 +22,6 @@ gulp.task('default', ['setup'], function() {
     });
 
     gulp.watch(['www/**/*'], reload);
-    gulp.watch(['bower_components'])
 
 });
 
