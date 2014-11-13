@@ -20,14 +20,13 @@
 
 
 
-<script src="lib/promise.js"></script>
+<!-- <script src="lib/promise.js"></script>
 <script src="lib/tabletop.js"></script>
-<script src="lib/marked.js"></script>
-<!-- <script src="lib/document-register-element.js"></script> -->
-<!-- <script src="lib/asb-list.js"></script> -->
-<script src="script.js?foo=bar"></script>
+<script src="lib/jsonml-html.js"></script>
+<script src="lib/markdown.js"></script>
+<script src="script.js?foo=bar"></script> -->
 
-
+<script src="lib/asb.all.min.js"></script>
 
 </head>
 
@@ -73,7 +72,10 @@
 	<div class="entry-content">
 
 
-	<!-- start: script her -->
+
+
+
+	<!-- start: google spreadsheets tabell -->
 
 	<div></div>
 
@@ -81,13 +83,13 @@
 		(function(el) {
 			new afb.Table({
 				'el'  : el,
-				'key' : '1ub7aK_fmUHPsSkrRberWwMFuc6Qbx_67euPluO_GRnU',
+				'key' : '1JgsUkMfoFhVe_TdhHGIvM5lbDD_qbGKQLmSOEjZMOZY',
 				'columns' : ['tidspunkt', 'aktivitet']
 			});
 		})([].pop.call(document.getElementsByTagName('div')));
 	</script>
 
-	<!-- end: script her -->
+	<!-- end: google spreadsheets  -->
 
 
 

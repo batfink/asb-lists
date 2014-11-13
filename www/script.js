@@ -64,9 +64,9 @@ afb.Table = function(config) {
 
                     var d = new Date(year, time[2] - 1, time[1]);
 
-                    var day = dayNames[d.getDay()];
+                    var day = shortDayNames[d.getDay()];
                     var date = time[1];
-                    var month = monthNames[time[2]-1];
+                    var month = shortMonthNames[time[2]-1];
 
                     var dateString = day + ' ' + date + '. ' + month;
 
@@ -78,15 +78,23 @@ afb.Table = function(config) {
                         dateString += '–' + time[5];
                     };
 
-                    console.log(time, dateString);
+                    //console.log(time, dateString);
 
 
                     cell = document.createElement('th');
                     cell.appendChild(document.createTextNode(dateString));
                 } else {
-                    cell = document.createElement('td');
-                    cell.innerHTML = marked(txt);
-                    cell.innerHTML = cell.getElementsByTagName('p')[0].innerHTML;
+
+                    cell = document.createDocumentFragment();
+
+                    var jsonml = markdown.toHTMLTree(txt)[1];
+                    jsonml.splice(0, 1, 'td');
+
+                    var el = JsonML.toHTML(jsonml);
+
+                    //console.log(el);
+
+                    cell.appendChild(el);
                 };
 
                 tr.appendChild(cell);
@@ -97,6 +105,9 @@ afb.Table = function(config) {
 
         return table;
     };
+
+
+
 
     function appendToPage(parent, table) {
         parent.appendChild(table);
