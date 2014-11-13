@@ -7,6 +7,9 @@
     "browser-sync": "~1.5.8",
     "document-register-element": "^0.1.6",
     "gulp": "~3.8.8",
-    "gulp-gh-pages": "^0.4.0"
+    "gulp-concat": "^2.4.1",
+    "gulp-gh-pages": "^0.4.0",
+    "gulp-uglify": "^1.0.1",
+    "markdown": "^0.5.0"
   }
 }
